@@ -5,6 +5,9 @@ from . import views
 
 urlpatterns = [
     path('', views.home,name='home'),
-    path('013b0a51-61d1-47d5-a37e-e1c9ca6c04f2',views.whatsAppWebhook,name='whatsapp-webhook'),
+    path('8a70d9b5-808e-48e2-a95f-c2bdaa5a6ad3',views.whatsAppWebhook,name='whatsapp-webhook'),
 
 ]
+# https://botwhatsappdemoleo.store/8a70d9b5-808e-48e2-a95f-c2bdaa5a6ad3
+
+#token=9a3e80a0-1bf0-40de-b00c-0ea39c993fbc
