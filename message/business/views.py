@@ -20,7 +20,7 @@ def whatsAppWebhook(request):
             return HttpResponse(challenge,status=200)
 
         else:
-            return HttpResponse('error',status=403)
+            return HttpResponse('errores',status=403)
 
 
     if request.method == 'POST':
