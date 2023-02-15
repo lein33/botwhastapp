@@ -6,12 +6,12 @@ from .functions import *
 import json
 # Create your views here.
 def home(request):
-    return render(request,'business/idex.html',{})
+    return render(request,'business/index.html',{})
 
 @csrf_exempt
 def whatsAppWebhook(request):
     if request.method == 'GET':
-        VERIFY_TOKEN ='cbf9838f-7ded-4f5e-8588-fe2b1bcbee90'
+        VERIFY_TOKEN ='26ce5829-2910-4301-8b62-7e8c99ffb33c'
         mode = request.GET['hub.mode']
         token = request.GET['hub.verify_token']
         challenge = request.GET['hub.challenge']
