@@ -6,7 +6,7 @@ from .functions import *
 import json
 # Create your views here.
 def home(request):
-    return render(request,'business/index.html',{})
+    return render(request,'business/idex.html',{})
 
 @csrf_exempt
 def whatsAppWebhook(request):
