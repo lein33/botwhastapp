@@ -11,7 +11,7 @@ def home(request):
 @csrf_exempt
 def whatsAppWebhook(request):
     if request.method == 'GET':
-        VERIFY_TOKEN ='26ce5829-2910-4301-8b62-7e8c99ffb33c'
+        VERIFY_TOKEN ='95fbcb92-f1ff-4ef2-95ee-5dfa3a03bf15'
         mode = request.GET['hub.mode']
         token = request.GET['hub.verify_token']
         challenge = request.GET['hub.challenge']
