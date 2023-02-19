@@ -1,7 +1,7 @@
 import os
 import openai
 from django.conf import settings
-open.api_key = settings.OPENAI_API_KEY
+openai.api_key = settings.OPENAI_API_KEY
 
 def companyDescription(business_name, business_type,country, product_service, short_description,years,progress):
     response = openai.Completion.create(
@@ -17,7 +17,9 @@ def companyDescription(business_name, business_type,country, product_service, sh
 
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'][0]['text'].replace('\n','')
+            answer = response['choices'][0]['text']
+            
+            #answer = response['choices'][0]['text'].replace('\n','<br>')
             return answer
         else:
             return ''
