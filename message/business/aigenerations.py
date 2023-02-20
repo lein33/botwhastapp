@@ -14,4 +14,4 @@ def companyDescription(nombre_comercial,tipo_negocio,pais):
         presence_penalty=0
     )
 
-    print(response.choices)
+    print(response)
