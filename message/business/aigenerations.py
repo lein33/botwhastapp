@@ -15,4 +15,11 @@ def companyDescription():
         presence_penalty=0
     )
 
-    print(response.choices[0]['text'])
+    if 'choices' in response:
+        if len(response['choices']>0):
+            answer = response['choices']
+            return answer
+        else:
+            return ''
+    else:
+        return ''
