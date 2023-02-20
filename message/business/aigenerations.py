@@ -63,6 +63,25 @@ def AnalisiMercado(nombre_empresa, producto_servicio,descripcion_corta):
             return ''
     else:
         return ''
+    
+def detalle_producto(nombre_empresa, producto_servicio,descripcion_corta):
+    response = openai.Completion.create(
+    model="text-davinci-003",
+    temperature=0.7,
+    prompt="generar una descripción detallada de productos y servicios para un plan de negocios para la empresa con los siguientes campos:\nnombre de la empresa: Zapatos\npruducto o servcio: Venta de zapatos para corre\nconsiderando los siguientes aspectos: Detalle del producto y Características del producto\n\n\n".format(nombre_empresa, producto_servicio,descripcion_corta),
+    max_tokens=2000,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0
+)
+    if 'choices' in response:
+        if len(response['choices'])>0:
+            answer = response['choices'][0]['text'].replace('\n','<br/>')
+            return nombre_empresa+answer
+        else:
+            return ''
+    else:
+        return ''
 
 def PlanEstrategiaMarketing(nombre_empresa, producto_servicio, descripcion_corta):
     response = openai.Completion.create(
