@@ -86,17 +86,17 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             try:
                 type =  int(text.replace(' ',''))
                 if type == 1:
-                    chat.nombre_empresa='(pty) Ltd'
+                    chat.tipo_empresa='(pty) Ltd'
                     chat.save()
                     message="A que pais proviene"
                     sendWhatsAppMessage(fromId,message)
                 elif type == 2:
-                    chat.nombre_empresa='Not Profit'
+                    chat.tipo_empresa='Not Profit'
                     chat.save()
                     message="A que pais biene"
                     sendWhatsAppMessage(fromId,message)
                 elif type == 3:
-                    chat.nombre_empresa='Partnership'
+                    chat.tipo_empresa='Partnership'
                     chat.save()
                     message="A que pais viene"
                     sendWhatsAppMessage(fromId,message)
