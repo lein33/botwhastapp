@@ -26,18 +26,18 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             perfil_usuario = user.perfil
         
         else:
-            user = User.objects.create(
+            user = User.objects.create_user(
             username=phoneId,
             email='te3ster@gfkfm-tech',
             password='04.desnutryfy',
             first_name=profileName)
 
-            perfil = Perfil.objects.create(
+            perfil_usuario = Perfil.objects.create(
             user="lein",
             phoneNumber="582",
             phoneId="123")
             
-        chat = ChatSessions.objects.create(perfil=perfil)
+        chat = ChatSessions.objects.create(perfil=perfil_usuario)
         message ="Bienvenido to the api creador plan de negocios"
         sendWhatsAppMessage(fromId,message)
 
