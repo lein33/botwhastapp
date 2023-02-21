@@ -26,7 +26,6 @@ def whatsAppWebhook(request):
 
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
 
         if 'object' in data and 'entry' in data:
             if data['object']=='whatsapp_business_account':
@@ -41,9 +40,9 @@ def whatsAppWebhook(request):
                         text = entry['changes'][0]['value']['messages'][0]['text']['body']
 
                         #phoneNumber='593990137716'   
-       #                 message = '{} {} {} {}'.format(text,phoneId,fromId,profileName) 
-                        handleWhatsAppChat(fromId, profileName, phoneId ,text)
-                        #sendWhatsAppMessage(phoneNumber, message)
+                        message = '{} {} {} {}'.format(text,phoneId,fromId,profileName) 
+       #                 handleWhatsAppChat(fromId, profileName, phoneId ,text)
+                        sendWhatsAppMessage(phoneNumber, message)
                         
 
                 else:
