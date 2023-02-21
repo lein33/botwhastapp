@@ -33,9 +33,9 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             first_name=profileName)
 
             perfil_usuario = Perfil.objects.create(
-            user=user,
-            phoneNumber=fromId,
-            phoneId=phoneId)
+            user="lein",
+            phoneNumber="582",
+            phoneId="123")
             
         chat = ChatSessions.objects.create(perfil=perfil_usuario)
         message ="Bienvenido to the api creador plan de negocios"
