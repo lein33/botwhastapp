@@ -40,8 +40,8 @@ def whatsAppWebhook(request):
                         text = entry['changes'][0]['value']['messages'][0]['text']['body']
 
 #                      phoneNumber='593990137716'   
-                        message = '{} {} {}'.format(text,phoneId,profileName,fromId) 
-#                        handleWhatsAppChat(fromId, profileName,phoneId ,text)
+                        message = '{} {} {}'.format(text,phoneId,profileName) 
+ #                       handleWhatsAppChat(fromId, profileName,phoneId ,text)
                         sendWhatsAppMessage(phoneNumber, message)
                         
 
