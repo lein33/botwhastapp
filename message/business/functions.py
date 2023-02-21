@@ -30,16 +30,14 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             username=profileName,
             email='te3ster@gfkfm-tech',
             password='password',
-            first_name=profileName,
-            )
+            first_name=profileName)
+
             perfil_usuario = Perfil.objects.create(
             user=user,
             phoneNumber=fromId,
-            phoneId=phoneId
-        )
-        chat = ChatSessions.objects.create(
-            perfil=perfil_usuario
-        )
+            phoneId=phoneId)
+            
+        chat = ChatSessions.objects.create(perfil=perfil_usuario)
         message ="Bienvenido to the api creador plan de negocios"
         sendWhatsAppMessage(fromId,message)
 
@@ -50,6 +48,8 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                     if chat.descripcion_corta:
                         if chat.años:
                             if chat.progreso:
+                                message ="danos un momento"
+                                sendWhatsAppMessage(fromId,message)
                             else:
                                 chat.progreso = text
                                 chat.save()
