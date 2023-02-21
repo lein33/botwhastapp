@@ -41,7 +41,7 @@ def whatsAppWebhook(request):
                         timestamp = entry['changes'][0]['value']['messages'][0]['timestamp']
                         text = entry['changes'][0]['value']['messages'][0]['text']['body']
 
-                        phoneNumber='593990137716'   
+                        #phoneNumber='593990137716'   
                         message = '{} {} {}'.format(text,phoneId,profileName,data) 
  #                       handleWhatsAppChat(fromId, profileName,phoneId ,text)
                         sendWhatsAppMessage(phoneNumber, message)
