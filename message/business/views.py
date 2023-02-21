@@ -43,6 +43,7 @@ def whatsAppWebhook(request):
                         message = '{}'.format(text) 
  #                       handleWhatsAppChat(fromId, profileName,phoneId ,text)
                         sendWhatsAppMessage(phoneNumber, message)
+                        print(fromId, profileName,phoneId,text)
 
                 except:
                     pass
