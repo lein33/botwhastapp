@@ -11,15 +11,15 @@ class Perfil(models.Model):
     phoneNumber = models.CharField(null=True, blank=True,max_length=100)
     phoneId = models.CharField(null=True, blank=True,max_length=100)
     
-    uniqueId = models.CharField(null=True, blank=True,max_length=100)
+    uniqueId = models.CharField(null=True, blank=True,unique=True,max_length=100)
     fecha_creacion = models.DateTimeField(blank=True,null=True)
     ultima_edicion = models.DateTimeField(blank=True,null=True)
 
-    def save(self,*args,**kwargs):
+    def save(self, *args, **kwargs):
         if self.fecha_creacion is None:
             self.fecha_creacion = timezone.localtime(timezone.now())
         if self.uniqueId is None:
-            self.uniqueId = str(uuid4().split('-')[4])
+            self.uniqueId = str(uuid4()).split('-')[4]
         
         self.ultima_edicion = timezone.localtime(timezone.now())
         super(Perfil, self).save(*args,**kwargs)
@@ -40,7 +40,7 @@ class PlanEmpresarial(models.Model):
         if self.fecha_creacion is None:
             self.fecha_creacion = timezone.localtime(timezone.now())
         if self.uniqueId is None:
-            self.uniqueId = str(uuid4().split('-')[4])
+            self.uniqueId = str(uuid4()).split('-')[4]
         
         self.ultima_edicion = timezone.localtime(timezone.now())
         super(PlanEmpresarial, self).save(*args,**kwargs)
@@ -71,7 +71,7 @@ class ChatSessions(models.Model):
         if self.fecha_creacion is None:
             self.fecha_creacion = timezone.localtime(timezone.now())
         if self.uniqueId is None:
-            self.uniqueId = str(uuid4().split('-')[4])
+            self.uniqueId = str(uuid4()).split('-')[4]
         
         self.ultima_edicion = timezone.localtime(timezone.now())
         super(ChatSessions, self).save(*args,**kwargs)
