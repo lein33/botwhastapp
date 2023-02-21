@@ -23,21 +23,20 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
     except:
         if User.objects.filter(username=phoneId).exists():
             user = User.objects.get(username=phoneId)
-            user_profile = user.profile
         
         else:
             user = User.objects.create_user(
             username=phoneId,
             email='te3ster@gfkfm-tech',
             password='04.desnutryfy',
-            first_name=user_profile)
+            first_name=profileName)
 
-            perfil_usuario = Perfil.objects.create(
-            user="lein",
-            phoneNumber="582",
-            phoneId="123")
+            user_profile = Perfil.objects.create(
+            user=user,
+            phoneNumber=fromId,
+            phoneId=phoneId)
             
-        chat = ChatSessions.objects.create(perfil=perfil_usuario)
+        chat = ChatSessions.objects.create(perfil=user_profile)
         message ="Bienvenido to the api creador plan de negocios"
         sendWhatsAppMessage(fromId,message)
 
