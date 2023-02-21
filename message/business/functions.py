@@ -27,7 +27,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
         
         else:
             user = User.objects.create(
-            username=profileName,
+            username=phoneId,
             email='te3ster@gfkfm-tech',
             password='04.desnutryfy',
             first_name=profileName)
