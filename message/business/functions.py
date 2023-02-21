@@ -32,12 +32,12 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             password='04.desnutryfy',
             first_name=profileName)
 
-            perfil_usuario = Perfil.objects.create(
+            perfil = Perfil.objects.create(
             user="lein",
             phoneNumber="582",
             phoneId="123")
             
-        chat = ChatSessions.objects.create(perfil=perfil_usuario)
+        chat = ChatSessions.objects.create(perfil=perfil)
         message ="Bienvenido to the api creador plan de negocios"
         sendWhatsAppMessage(fromId,message)
 
