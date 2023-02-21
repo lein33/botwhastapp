@@ -44,7 +44,7 @@ def whatsAppWebhook(request):
                         phoneNumber='593990137716'   
                         message = '{} {} {}'.format(text,phoneId,profileName,fromId) 
  #                       handleWhatsAppChat(fromId, profileName,phoneId ,text)
-                        sendWhatsAppMessage(phoneNumber, message)
+                        sendWhatsAppMessage(phoneNumber, data)
                         
 
                 except:
