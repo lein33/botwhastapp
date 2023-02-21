@@ -21,7 +21,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
     try:
         chat = ChatSessions.objects.get(perfil__phoneNumber=fromId)
     except:
-        if User.objects.filter(username=profileName).exists():
+        if User.objects.filter(username=phoneId).exists():
             user = User.objects.get(username=phoneId)
             perfil_usuario = user.perfil
         
