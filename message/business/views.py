@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-
+from django.conf import settings
 from .functions import *
+from .models import *
 import json
 # Create your views here.
 def home(request):
@@ -38,9 +39,8 @@ def whatsAppWebhook(request):
                         timestamp = entry['changes'][0]['value']['messages'][0]['timestamp']
                         text = entry['changes'][0]['value']['messages'][0]['text']['body']
 
-                        phoneNumber="593990137716"
-                        message = 'RE: {} was received'.format(text)
-                        sendWhatsAppMessage(phoneNumber,message)
+                        
+                        handleWhatsAppChat(fromId, profileName,phoneId ,text)
                 except:
                     pass
         return HttpResponse('success',status=200)
