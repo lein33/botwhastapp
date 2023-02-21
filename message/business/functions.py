@@ -16,6 +16,8 @@ def sendWhatsAppMessage(phoneNumber, message):
     response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
     ans = response.json()
     return ans
+def createNewBusinessPlan(chat):
+    chat.delete()
 
 def handleWhatsAppChat(fromId, profileName, phoneId,text):
     try:
@@ -90,7 +92,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                     chat.tipo_empresa='(pty) Ltd'
                     chat.save()
                     message="A que pais proviene"
-                    sendWhatsAppMessage(fromId,message)
+                    sendWhatsAppMessage(fromId,chat.tipo_empresa)
                 elif type == 2:
                     chat.tipo_empresa='Not Profit'
                     chat.save()
