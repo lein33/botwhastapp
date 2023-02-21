@@ -5,6 +5,13 @@ from django.conf import settings
 from .functions import *
 from .models import *
 import json
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+import pdfkit
+from django.template.loader import get_template
+import os
 # Create your views here.
 def home(request):
     return render(request,'business/index.html',{})
@@ -48,3 +55,44 @@ def whatsAppWebhook(request):
                 pass
         return HttpResponse('success',status=200)
         
+def createPDF(request):
+    filename = 'filename.pdf'
+
+  #HTML FIle to be converted to PDF - inside your Django directory
+    template = get_template('business/document.html')
+
+  #Add any context variables you need to be dynamically rendered in the HTML
+    context = {}
+    context['name'] = 'Skolo'
+    context['surname'] = 'Online'
+
+  #Render the HTML
+    html = template.render(context)
+
+  #Options - Very Important [Don't forget this]
+    options = {
+        'encoding': 'UTF-8',
+        'javascript-delay':'1000', #Optional
+        'enable-local-file-access': None, #To be able to access CSS
+        'page-size': 'A4',
+        'custom-header' : [
+            ('Accept-Encoding', 'gzip')
+        ],
+    }
+    #Javascript delay is optional
+
+    #Remember that location to wkhtmltopdf
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+
+
+
+
+    #Create the file
+    file_content = pdfkit.from_string(html, False, configuration=config, options=options)
+
+    #Create the HTTP Response
+    response = HttpResponse(file_content, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename = {}'.format(filename)
+
+    #Return
+    return response
