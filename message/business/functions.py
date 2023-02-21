@@ -23,6 +23,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
     except:
         if User.objects.filter(username=phoneId).exists():
             usuario = User.objects.get(username=phoneId)
+            user_profile = usuario.profile
         
         else:
             usuario = User.objects.create_user(
