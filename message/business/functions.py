@@ -2,6 +2,15 @@ from django.conf import settings
 import requests
 import json
 from .models import *
+from django.http import HttpResponse
+from django.shortcuts import render
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+import pdfkit
+from django.template.loader import get_template
+import os
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
@@ -16,7 +25,47 @@ def sendWhatsAppMessage(phoneNumber, message):
     response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
     ans = response.json()
     return ans
+
+       
+def createPDF(chat, plan_negocio):
+    perfil = chat.perfil
+    filename = plan_negocio.uniqueId+'.pdf'
+
+  #HTML FIle to be converted to PDF - inside your Django directory
+    template = get_template('business/document.html')
+
+  #Add any context variables you need to be dynamically rendered in the HTML
+    context = {}
+    context['name'] = 'Skolo'
+    context['surname'] = 'Online'
+
+  #Render the HTML
+    html = template.render(context)
+
+  #Options - Very Important [Don't forget this]
+    options = {
+        'encoding': 'UTF-8',
+        'javascript-delay':'1000', #Optional
+        'enable-local-file-access': None, #To be able to access CSS
+        'page-size': 'A4',
+        'custom-header' : [
+            ('Accept-Encoding', 'gzip')
+        ],
+    }
+    #Javascript delay is optional
+
+    #Remember that location to wkhtmltopdf
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+
+    filepath = settings.MEDIA_ROOT+'business_plans/{}'.format(perfil.uniqueId)
+    os.makedirs(file_path, exist_ok=True)
+    pdf_save_path = filepath+filename    
+    pdfkit.from_string(html, pdf_save_path, configuration=config, options=options)
+
+    return "https://botwhatsappdemoleo.store/"+pdf_save_path
+
 def createNewBusinessPlan(chat):
+    doc_url = createPDF(chat, plan_negocio)
     chat.delete()
 
 def handleWhatsAppChat(fromId, profileName, phoneId,text):
