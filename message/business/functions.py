@@ -68,7 +68,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                                 message =" intenta nuevamente cuantos tiempo estas en elnegocio 1 o 2"
                                 sendWhatsAppMessage(fromId,message)
                     else:
-                        chat.prducto_servicio = text
+                        chat.descripcion_corta = text
                         chat.save()
                         message ="Cuantos tiempo estas en elnegocio 1 o 2"
                         sendWhatsAppMessage(fromId,message)
