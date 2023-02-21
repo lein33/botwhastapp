@@ -43,7 +43,7 @@ class PlanEmpresarial(models.Model):
             self.uniqueId = str(uuid4().split('-')[4])
         
         self.ultima_edicion = timezone.localtime(timezone.now())
-        super(Perfil, self).save(*args,**kwargs)
+        super(PlanEmpresarial, self).save(*args,**kwargs)
 
 
 class ChatSessions(models.Model):
@@ -74,4 +74,4 @@ class ChatSessions(models.Model):
             self.uniqueId = str(uuid4().split('-')[4])
         
         self.ultima_edicion = timezone.localtime(timezone.now())
-        super(Perfil, self).save(*args,**kwargs)
+        super(ChatSessions, self).save(*args,**kwargs)
