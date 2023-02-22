@@ -145,12 +145,14 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                             if chat.progreso:
                                 message ="danos un momento"
                                 sendWhatsAppMessage(fromId,message)
+                                return ''
                             else:
                                 chat.progreso = text
                                 chat.save()
                                 message =" Bien,nosotros tenemos lo que necesitamos"
                                 sendWhatsAppMessage(fromId,message)
-                                createNewBusinessPlan(chat)
+                                #createNewBusinessPlan(chat)
+                                return ''
                                 
                         else:
                             try:
@@ -160,10 +162,11 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
 
                                 message =" Cuanto has logrado en tu negocio"
                                 sendWhatsAppMessage(fromId,message)
-
+                                return ''
                             except:
                                 message =" intenta nuevamente cuantos tiempo estas en elnegocio 1 o 2"
                                 sendWhatsAppMessage(fromId,message)
+                                return ''
                     else:
                         chat.descripcion_corta = text
                         chat.save()
