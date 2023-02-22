@@ -149,7 +149,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                                 chat.save()
                                 message =" Bien,nosotros tenemos lo que necesitamos"
                                 sendWhatsAppMessage(fromId,message)
-                                #createNewBusinessPlan(chat)
+                                createNewBusinessPlan(chat)
                                 return ''
                                 
                         else:
