@@ -51,7 +51,7 @@ def createPDF(chat, plan_negocio):
   #Options - Very Important [Don't forget this]
     options = {
         'encoding': 'UTF-8',
-        'javascript-delay':'1000', #Optional
+        'javascript-delay':'None', #Optional
         'enable-local-file-access': None, #To be able to access CSS
         'page-size': 'A4',
         'custom-header' : [
@@ -63,7 +63,7 @@ def createPDF(chat, plan_negocio):
     #Remember that location to wkhtmltopdf
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
-    file_path = settings.MEDIA_ROOT+'business_plans/{}/'.format(perfil.uniqueId)
+    file_path = settings.MEDIA_ROOT+'/business_plans/{}/'.format(perfil.uniqueId)
     os.makedirs(file_path, exist_ok=True)
     pdf_save_path = file_path+filename    
     pdfkit.from_string(html, pdf_save_path, configuration=config, options=options)
