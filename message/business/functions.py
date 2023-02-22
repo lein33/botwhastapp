@@ -186,7 +186,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                     chat.tipo_empresa='(pty) Ltd'
                     chat.save()
                     message="A que pais proviene"
-                    sendWhatsAppMessage(fromId,chat.tipo_empresa)
+                    sendWhatsAppMessage(fromId,message)
                 elif type == 2:
                     chat.tipo_empresa='Not Profit'
                     chat.save()
