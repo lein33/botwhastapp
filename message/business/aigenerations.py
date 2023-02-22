@@ -101,3 +101,22 @@ def PlanEstrategiaMarketing(nombre_empresa, producto_servicio, descripcion_corta
             return ''
     else:
         return ''
+
+def AnalisisFoda(nombre_empresa, producto_servicio, descripcion_corta):
+    response = openai.Completion.create(
+    model="text-davinci-003",
+    prompt="genera un analisis de foda para un plan de negocios, para el siguiente negocio:\nnombre empresa:  {}\nproducto o servicio: {}\ndescripcion corta: {}\n".format(nombre_empresa,producto_servicio,descripcion_corta),
+    temperature=0.4,
+    max_tokens=2000,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0
+)
+    if 'choices' in response:
+        if len(response['choices'])>0:
+            answer = response['choices'][0]['text'].replace('\n','<br/>')
+            return nombre_empresa+answer
+        else:
+            return ''
+    else:
+        return ''

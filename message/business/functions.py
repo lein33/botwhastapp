@@ -10,6 +10,7 @@ from django.shortcuts import render
 
 import pdfkit
 from django.template.loader import get_template
+from .aigenerations import *
 import os
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
@@ -57,14 +58,37 @@ def createPDF(chat, plan_negocio):
     #Remember that location to wkhtmltopdf
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
-    filepath = settings.MEDIA_ROOT+'business_plans/{}'.format(perfil.uniqueId)
+    filepath = settings.MEDIA_ROOT+'business_plans/{}/'.format(perfil.uniqueId)
     os.makedirs(file_path, exist_ok=True)
     pdf_save_path = filepath+filename    
     pdfkit.from_string(html, pdf_save_path, configuration=config, options=options)
 
-    return "https://botwhatsappdemoleo.store/"+pdf_save_path
+    return 'https://botwhatsappdemoleo.store/uploads'+'/business_plans/{}/{}'.format(perfil.uniqueId,filename)
+
+def crearPlanNegocio(chat):
+    descripcion_compania = descripcion_compania(chat.nombre_empresa,
+                                                chat.tipo_empresa,
+                                                chat.pais,
+                                                chat.producto_servicio,
+                                                chat.descripcion_corta,
+                                                chat.años,
+                                                chat.progreso
+                                                )
+    analisis_mercado = AnalisiMercado(chat.nombre_empresa, 
+                                      chat.producto_servicio,
+                                      chat.descripcion_corta)
+    
+    analisis_foda = AnalisisFoda(chat.nombre_empresa, 
+                                 chat.producto_servicio, 
+                                 chat.descripcion_corta
+                                 )
+
+    detalle_producto = detalle_producto(chat.nombre_empresa, 
+                                        chat.producto_servicio, 
+                                        chat.descripcion_corta)
 
 def createNewBusinessPlan(chat):
+    crearPlanNegocio(chat)
     doc_url = createPDF(chat, plan_negocio)
     chat.delete()
 
