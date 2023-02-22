@@ -12,6 +12,8 @@ import pdfkit
 from django.template.loader import get_template
 from .aigenerations import *
 import os
+import asyncio
+loop = asyncio.new_event_looP()
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
@@ -143,6 +145,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                             if chat.progreso:
                                 message ="danos un momento"
                                 sendWhatsAppMessage(fromId,message)
+                                loop.run_in_executor(None, createNewBusinessPlan, chat)
                                 return ''
                             else:
                                 chat.progreso = text
