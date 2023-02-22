@@ -111,8 +111,8 @@ def createNewBusinessPlan(chat):
     message='Your business \n \n{}'.format(doc_url)
     sendWhatsAppMessage(chat.perfil.phoneNumber,  message)
     chat.delete()
-    user = User.objects.filter(username=chat.perfil.user)
-    user.delete()
+    userdel = User.objects.filter(username=chat.perfil.user)
+    userdel.delete()
 def handleWhatsAppChat(fromId, profileName, phoneId,text):
     try:
         chat = ChatSessions.objects.get(perfil__phoneNumber=fromId)
