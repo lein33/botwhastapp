@@ -63,9 +63,9 @@ def createPDF(chat, plan_negocio):
     #Remember that location to wkhtmltopdf
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
-    filepath = settings.MEDIA_ROOT+'business_plans/{}/'.format(perfil.uniqueId)
+    file_path = settings.MEDIA_ROOT+'business_plans/{}/'.format(perfil.uniqueId)
     os.makedirs(file_path, exist_ok=True)
-    pdf_save_path = filepath+filename    
+    pdf_save_path = file_path+filename    
     pdfkit.from_string(html, pdf_save_path, configuration=config, options=options)
 
     return 'https://botwhatsappdemoleo.store/uploads'+'/business_plans/{}/{}'.format(perfil.uniqueId,filename)
@@ -105,11 +105,11 @@ def crearPlanNegocio(chat):
     )
     plan_negocios.save()
     return plan_negocios
-def createNewBusinessPlan(chat, fromId):
+def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
     doc_url = createPDF(chat, plan_negocio)
     message='Your business \n \n{}'.format(doc_url)
-    sendWhatsAppMessage(fromId,  message)
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  message)
     chat.delete()
 
 def handleWhatsAppChat(fromId, profileName, phoneId,text):
@@ -150,7 +150,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                                 chat.save()
                                 message =" Bien,nosotros tenemos lo que necesitamos"
                                 sendWhatsAppMessage(fromId,message)
-                                createNewBusinessPlan(chat,fromId)
+                                createNewBusinessPlan(chat)
                                 
                         else:
                             try:
