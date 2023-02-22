@@ -52,7 +52,7 @@ def createPDF(chat, plan_negocio):
     options = {
         'encoding': 'UTF-8',
         'javascript-delay':'None', #Optional
-        'enable-local-file-access': None, #To be able to access CSS
+        'enable-local-file-access': 1000, #To be able to access CSS
         'page-size': 'A4',
         'custom-header' : [
             ('Accept-Encoding', 'gzip')
