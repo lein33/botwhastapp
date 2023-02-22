@@ -76,8 +76,7 @@ def crearPlanNegocio(chat):
                                                 chat.pais,
                                                 chat.prducto_servicio,
                                                 chat.descripcion_corta,
-                                                chat.años,
-                                                chat.progreso
+                                                chat.años
                                                 )
     analisis_de_mercado = AnalisiMercado(chat.nombre_empresa, 
                                       chat.prducto_servicio,
