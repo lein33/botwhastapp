@@ -100,7 +100,7 @@ def crearPlanNegocio(chat):
         analisis_mercado=analisis_de_mercado,
         analisis_foda=analisis_de_foda,
         detalle_producto=detalles_producto,
-        estrategia_marketing=plan_estrategia_marketing
+        strategia_marketing=plan_estrategia_marketing
     )
     plan_negocios.save()
     return plan_negocios
