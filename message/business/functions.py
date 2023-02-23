@@ -104,6 +104,8 @@ def crearPlanNegocio(chat):
         strategia_marketing=plan_estrategia_marketing
     )
     plan_negocios.save()
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
+
     return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
