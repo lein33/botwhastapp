@@ -13,7 +13,7 @@ from django.template.loader import get_template
 from .aigenerations import *
 import os
 import asyncio
-loop = asyncio.new_event_looP()
+loop = asyncio.new_event_loop()
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
