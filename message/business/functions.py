@@ -133,7 +133,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                             if chat.progreso:
                                 message ="danos un momento"
                                 sendWhatsAppMessage(fromId,message)
-                                createNewBusinessPlan(chat)
+                                crearPlanNegocio(chat)
                          #       loop.run_in_executor(None, createNewBusinessPlan, chat)
                                 return ''
                             else:
