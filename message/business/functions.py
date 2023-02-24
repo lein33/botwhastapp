@@ -12,7 +12,20 @@ import pdfkit
 from django.template.loader import get_template
 from .aigenerations import *
 import os
-import threading
+from threading import Thread
+class CustomThread(Thread):
+    def __init__(self,group=None,target=None,name=None,args=(),kwargs={},Verbose=None):
+        Thread.__init__(self,group,target,name,args,kwargs)
+        self.__return = None
+    
+    def run(self):
+        if self._target is not None:
+            self._return = self._target(*self._args,**self._kwargs)
+
+    def join(self):
+        Thread.join(self)
+        return self._return
+    
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
@@ -72,13 +85,13 @@ def createPDF(chat, plan_negocio):
 
 def crearPlanNegocio(chat):
     
-    descripcion_de_compania = threading.Thread(target=descripcion_compania,args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
-    analisi_de_mercado = threading.Thread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
+    descripcion_de_compania = CustomThread(target=descripcion_compania,args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
+    analisi_de_mercado = CustomThread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
     
-    analisis_Foda = threading.Thread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    analisis_Foda = CustomThread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
-    detalle_de_producto = threading.Thread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
-    plan_estrategia_de_marketing=threading.Thread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    detalle_de_producto = CustomThread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    plan_estrategia_de_marketing=CustomThread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     
     descripcion_de_compania.start()
     analisi_de_mercado.start()
@@ -86,7 +99,8 @@ def crearPlanNegocio(chat):
     detalle_de_producto.start()
     plan_estrategia_de_marketing.start()
 
-    descripcion_de_compania.join()
+    
+    """
     analisi_de_mercado.join()
     analisis_Foda.join()
     detalle_de_producto.join()
@@ -100,7 +114,8 @@ def crearPlanNegocio(chat):
         strategia_marketing=plan_estrategia_de_marketing
     )
     plan_negocios.save()
-    sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
+    """
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  descripcion_de_compania.join())
     #return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
