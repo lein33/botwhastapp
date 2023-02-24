@@ -90,13 +90,13 @@ def crearPlanNegocio(chat):
     
     analisis_Foda = CustomThread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
-    #detalle_de_producto = CustomThread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    detalle_de_producto = CustomThread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     #plan_estrategia_de_marketing=CustomThread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     
     descripcion_de_compania.start()
     analisi_de_mercado.start()
     analisis_Foda.start()
-    #detalle_de_producto.start()
+    detalle_de_producto.start()
     #plan_estrategia_de_marketing.start()
 
     
@@ -105,7 +105,7 @@ def crearPlanNegocio(chat):
         descripcion_compania=descripcion_de_compania.join(),
         analisis_mercado=analisi_de_mercado.join(),
         analisis_foda=analisis_Foda.join(),
-        detalle_producto="detalle",
+        detalle_producto=detalle_de_producto.join(),
         strategia_marketing="marketing"
     )
     plan_negocios.save()
