@@ -12,8 +12,7 @@ import pdfkit
 from django.template.loader import get_template
 from .aigenerations import *
 import os
-import asyncio
-loop = asyncio.new_event_loop()
+import threading
 def sendWhatsAppMessage(phoneNumber, message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
@@ -72,30 +71,27 @@ def createPDF(chat, plan_negocio):
     return 'https://botwhatsappdemoleo.store/uploads'+'/business_plans/{}/{}'.format(perfil.uniqueId,filename)
 
 def crearPlanNegocio(chat):
-    """
-    descripcion_compania = descripcion_compania(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años)
-    AnalisiMercado = AnalisiMercado(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta)
     
-    AnalisisFoda = AnalisisFoda(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
+    descripcion_de_compania = threading.Thread(target=descripcion_compania(),args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
+    analisi_de_mercado = threading.Thread(target=AnalisiMercado(),args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
+    
+    analisis_Foda = threading.Thread(target=AnalisisFoda(),args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
-    detalle_producto = detalle_producto(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
-    PlanEstrategiaMarketing=PlanEstrategiaMarketing(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
+    detalle_de_producto = threading.Thread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    plan_estrategia_de_marketing=threading.Thread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     
-    plan_negocios=PlanEmpresarial.objects.create(
-        perfil = chat.perfil,
-        descripcion_compania = descripcion_compania,
-        analisis_mercado=AnalisiMercado,
-        analisis_foda=AnalisisFoda,
-        detalle_producto=detalle_producto,
-        strategia_marketing=PlanEstrategiaMarketing
-    )
-    """
+    descripcion_de_compania.start()
+    analisi_de_mercado.start()
+    analisis_Foda.start()
+    detalle_de_producto.start()
+    plan_estrategia_de_marketing.start()
+    
     plan_negocios = PlanEmpresarial.objects.create(
-        descripcion_compania="shoes ldta",
-        analisis_mercado="convertir",
-        analisis_foda="foda",
-        detalle_producto="detalle",
-        strategia_marketing="marketing"
+        descripcion_compania=descripcion_de_compania,
+        analisis_mercado=analisi_de_mercado,
+        analisis_foda=analisis_Foda,
+        detalle_producto=detalle_de_producto,
+        strategia_marketing=plan_estrategia_de_marketing
     )
     plan_negocios.save()
     sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
