@@ -100,22 +100,17 @@ def crearPlanNegocio(chat):
     plan_estrategia_de_marketing.start()
 
     
-    """
-    analisi_de_mercado.join()
-    analisis_Foda.join()
-    detalle_de_producto.join()
-    plan_estrategia_de_marketing.join()
 
     plan_negocios = PlanEmpresarial.objects.create(
-        descripcion_compania=descripcion_de_compania,
-        analisis_mercado=analisi_de_mercado,
-        analisis_foda=analisis_Foda,
-        detalle_producto=detalle_de_producto,
-        strategia_marketing=plan_estrategia_de_marketing
+        descripcion_compania=descripcion_de_compania.join(),
+        analisis_mercado=analisi_de_mercado.join(),
+        analisis_foda=analisis_Foda.join(),
+        detalle_producto=detalle_de_producto.join(),
+        strategia_marketing=plan_estrategia_de_marketing.join()
     )
     plan_negocios.save()
-    """
-    sendWhatsAppMessage(chat.perfil.phoneNumber,  descripcion_de_compania.join())
+
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  "creado en un momento te enviamos el trabajo")
     #return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
@@ -157,7 +152,8 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                         if chat.años:
                             if chat.progreso:
                                 message ="danos un momento"
-                                
+                                sendWhatsAppMessage(fromId,message)
+
                                 crearPlanNegocio(chat)
                                 return ''
                             else:
