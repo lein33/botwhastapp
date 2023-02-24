@@ -94,7 +94,7 @@ def crearPlanNegocio(chat):
     #plan_estrategia_de_marketing=CustomThread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     
     descripcion_de_compania.start()
-    #analisi_de_mercado.start()
+    analisi_de_mercado.start()
     #analisis_Foda.start()
     #detalle_de_producto.start()
     #plan_estrategia_de_marketing.start()
