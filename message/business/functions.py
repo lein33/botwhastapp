@@ -104,7 +104,7 @@ def crearPlanNegocio(chat):
     plan_negocios = PlanEmpresarial.objects.create(
         descripcion_compania=descripcion_de_compania.join(),
         analisis_mercado=analisi_de_mercado.join(),
-        analisis_foda=analisis_Foda,
+        analisis_foda=analisis_Foda.join(),
         detalle_producto="detalle",
         strategia_marketing="marketing"
     )
