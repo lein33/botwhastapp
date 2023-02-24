@@ -135,7 +135,6 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                                 message ="danos un momento"
                                 
                                 crearPlanNegocio(chat)
-                                sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
 #                                loop.run_in_executor(None, createNewBusinessPlan, chat)
                                 return ''
                             else:
