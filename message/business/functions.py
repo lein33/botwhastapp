@@ -86,31 +86,31 @@ def createPDF(chat, plan_negocio):
 def crearPlanNegocio(chat):
     
     descripcion_de_compania = CustomThread(target=descripcion_compania,args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
-    analisi_de_mercado = CustomThread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
+    #analisi_de_mercado = CustomThread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
     
-    analisis_Foda = CustomThread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    #analisis_Foda = CustomThread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
-    detalle_de_producto = CustomThread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
-    plan_estrategia_de_marketing=CustomThread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    #detalle_de_producto = CustomThread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    #plan_estrategia_de_marketing=CustomThread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     
     descripcion_de_compania.start()
-    analisi_de_mercado.start()
-    analisis_Foda.start()
-    detalle_de_producto.start()
-    plan_estrategia_de_marketing.start()
+    #analisi_de_mercado.start()
+    #analisis_Foda.start()
+    #detalle_de_producto.start()
+    #plan_estrategia_de_marketing.start()
 
     
 
     plan_negocios = PlanEmpresarial.objects.create(
         descripcion_compania=descripcion_de_compania.join(),
-        analisis_mercado=analisi_de_mercado.join(),
-        analisis_foda=analisis_Foda.join(),
-        detalle_producto=detalle_de_producto.join(),
-        strategia_marketing=plan_estrategia_de_marketing.join()
+        analisis_mercado="mercado",
+        analisis_foda="foda",
+        detalle_producto="detalle",
+        strategia_marketing="marketing"
     )
     plan_negocios.save()
 
-    sendWhatsAppMessage(chat.perfil.phoneNumber,  "cr")
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  "generado")
     #return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
