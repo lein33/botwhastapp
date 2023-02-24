@@ -110,7 +110,7 @@ def crearPlanNegocio(chat):
     )
     plan_negocios.save()
 
-    sendWhatsAppMessage(chat.perfil.phoneNumber,  "creado en un momento te enviamos el trabajo")
+    sendWhatsAppMessage(chat.perfil.phoneNumber,  "cr")
     #return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
@@ -153,7 +153,6 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                             if chat.progreso:
                                 message ="danos un momento"
                                 sendWhatsAppMessage(fromId,message)
-
                                 crearPlanNegocio(chat)
                                 return ''
                             else:
