@@ -72,6 +72,7 @@ def createPDF(chat, plan_negocio):
     return 'https://botwhatsappdemoleo.store/uploads'+'/business_plans/{}/{}'.format(perfil.uniqueId,filename)
 
 def crearPlanNegocio(chat):
+    """
     descripcion_compania = descripcion_compania(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años)
     AnalisiMercado = AnalisiMercado(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta)
     
@@ -88,7 +89,8 @@ def crearPlanNegocio(chat):
         detalle_producto=detalle_producto,
         strategia_marketing=PlanEstrategiaMarketing
     )
-    plan_negocios.save()
+    """
+    #plan_negocios.save()
     sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
     return plan_negocios
 def createNewBusinessPlan(chat):
@@ -131,24 +133,8 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                         if chat.años:
                             if chat.progreso:
                                 message ="danos un momento"
-                                sendWhatsAppMessage(fromId,message)
-                                descripcion_compania = descripcion_compania(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años)
-                                AnalisiMercado = AnalisiMercado(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta)
-    
-                                AnalisisFoda = AnalisisFoda(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
-
-                                detalle_producto = detalle_producto(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
-                                PlanEstrategiaMarketing=PlanEstrategiaMarketing(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta)
-    
-                                plan_negocios=PlanEmpresarial.objects.create(
-                                    perfil = chat.perfil,
-                                    descripcion_compania = descripcion_compania,
-                                    analisis_mercado=AnalisiMercado,
-                                    analisis_foda=AnalisisFoda,
-                                    detalle_producto=detalle_producto,
-                                    strategia_marketing=PlanEstrategiaMarketing
-                                    )
-                                plan_negocios.save()
+                                
+                                crearPlanNegocio(chat)
                                 sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
 #                                loop.run_in_executor(None, createNewBusinessPlan, chat)
                                 return ''
