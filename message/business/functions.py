@@ -72,10 +72,10 @@ def createPDF(chat, plan_negocio):
 
 def crearPlanNegocio(chat):
     
-    descripcion_de_compania = threading.Thread(target=descripcion_compania(),args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
-    analisi_de_mercado = threading.Thread(target=AnalisiMercado(),args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
+    descripcion_de_compania = threading.Thread(target=descripcion_compania,args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
+    analisi_de_mercado = threading.Thread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
     
-    analisis_Foda = threading.Thread(target=AnalisisFoda(),args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
+    analisis_Foda = threading.Thread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
     detalle_de_producto = threading.Thread(target=detalle_producto,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
     plan_estrategia_de_marketing=threading.Thread(target=PlanEstrategiaMarketing,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
@@ -85,7 +85,13 @@ def crearPlanNegocio(chat):
     analisis_Foda.start()
     detalle_de_producto.start()
     plan_estrategia_de_marketing.start()
-    
+
+    descripcion_de_compania.join()
+    analisi_de_mercado.join()
+    analisis_Foda.join()
+    detalle_de_producto.join()
+    plan_estrategia_de_marketing.join()
+
     plan_negocios = PlanEmpresarial.objects.create(
         descripcion_compania=descripcion_de_compania,
         analisis_mercado=analisi_de_mercado,
@@ -138,7 +144,6 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                                 message ="danos un momento"
                                 
                                 crearPlanNegocio(chat)
-#                                loop.run_in_executor(None, createNewBusinessPlan, chat)
                                 return ''
                             else:
                                 chat.progreso = text
