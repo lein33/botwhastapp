@@ -111,7 +111,8 @@ def crearPlanNegocio(chat):
     plan_negocios.save()
 
     sendWhatsAppMessage(chat.perfil.phoneNumber,  "generado")
-    #return plan_negocios
+    chat.delete()
+    return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
     doc_url = createPDF(chat, plan_negocio)
