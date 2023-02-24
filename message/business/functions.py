@@ -90,9 +90,16 @@ def crearPlanNegocio(chat):
         strategia_marketing=PlanEstrategiaMarketing
     )
     """
-    #plan_negocios.save()
+    plan_negocios = PlanEmpresarial.objects.create(
+        descripcion_compania="shoes ldta",
+        analisis_mercado="convertir",
+        analisis_foda="foda",
+        detalle_producto="detalle",
+        strategia_marketing="marketing"
+    )
+    plan_negocios.save()
     sendWhatsAppMessage(chat.perfil.phoneNumber,  "plan_creado")
-    return plan_negocios
+    #return plan_negocios
 def createNewBusinessPlan(chat):
     plan_negocio=crearPlanNegocio(chat)
     doc_url = createPDF(chat, plan_negocio)
