@@ -86,7 +86,7 @@ def createPDF(chat, plan_negocio):
 def crearPlanNegocio(chat):
     
     descripcion_de_compania = CustomThread(target=descripcion_compania,args=(chat.nombre_empresa,chat.tipo_empresa,chat.pais,chat.prducto_servicio,chat.descripcion_corta,chat.años))
-    #analisi_de_mercado = CustomThread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
+    analisi_de_mercado = CustomThread(target=AnalisiMercado,args=(chat.nombre_empresa, chat.prducto_servicio,chat.descripcion_corta))
     
     #analisis_Foda = CustomThread(target=AnalisisFoda,args=(chat.nombre_empresa, chat.prducto_servicio, chat.descripcion_corta))
 
@@ -103,7 +103,7 @@ def crearPlanNegocio(chat):
 
     plan_negocios = PlanEmpresarial.objects.create(
         descripcion_compania=descripcion_de_compania.join(),
-        analisis_mercado="mercado",
+        analisis_mercado=analisi_de_mercado.join(),
         analisis_foda="foda",
         detalle_producto="detalle",
         strategia_marketing="marketing"
