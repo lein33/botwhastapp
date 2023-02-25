@@ -154,7 +154,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
                             if chat.progreso:
                                 message ="danos un momento"
                                 sendWhatsAppMessage(fromId,message)
-                                crearPlanNegocio(chat)
+                                createNewBusinessPlan(chat)
                                 return ''
                             else:
                                 chat.progreso = text
