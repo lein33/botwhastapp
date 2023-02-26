@@ -41,7 +41,23 @@ def sendWhatsAppMessage(phoneNumber, message):
     ans = response.json()
     return ans
 
-       
+def sendWhatsAppMedia(phoneNumber, message):
+    headers = {"Authorization": settings.WHATSAPP_TOKEN}
+    payload = {
+        "messaging_product":"whatsapp",
+        "recipient_type":"individual",
+        "to":phoneNumber,
+        "type":"document",
+        "document":{
+            "link":'https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1/',
+            "filename":'840602348bf6.pdf'
+        }
+            
+        
+    }
+    response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
+    ans = response.json()
+    return ans       
 def createPDF(chat, plan_negocio):
     perfil = chat.perfil
     filename = plan_negocio.uniqueId+'.pdf'
