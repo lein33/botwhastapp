@@ -47,9 +47,9 @@ def sendWhatsAppMedia(phoneNumber):
         "messaging_product":"whatsapp",
         "recipient_type":"individual",
         "to":phoneNumber,
-        "type":"image",
-        "image":{
-            "link":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Artificial_Intelligence_%26_AI_%26_Machine_Learning_-_30212411048.jpg/1200px-Artificial_Intelligence_%26_AI_%26_Machine_Learning_-_30212411048.jpg"
+        "type":"document",
+        "document":{
+            "link":"https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1/3170d3c8d05b.pdf"
         }
             
         
