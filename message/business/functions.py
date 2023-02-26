@@ -49,8 +49,8 @@ def sendWhatsAppMedia(phoneNumber):
         "to":phoneNumber,
         "type":"document",
         "document":{
-            "link":'https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1/',
-            "filename":'840602348bf6.pdf'
+            "link":"https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1",
+            "filename":"840602348bf6.pdf"
         }
             
         
@@ -239,6 +239,6 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
         chat.nombre_empresa=text
         chat.save()
         message="Porfavor, Ahora ingresa negocio"
-        sendWhatsAppMessage(fromId,message)
+        #sendWhatsAppMessage(fromId,message)
         sendWhatsAppMedia(fromId)
 
