@@ -41,7 +41,7 @@ def sendWhatsAppMessage(phoneNumber, message):
     ans = response.json()
     return ans
 
-def sendWhatsAppMedia(phoneNumber,message):
+def sendWhatsAppMedia(phoneNumber):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
         "messaging_product":"whatsapp",
