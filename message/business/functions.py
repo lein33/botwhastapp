@@ -49,7 +49,7 @@ def sendWhatsAppMedia(phoneNumber,message):
         "to":phoneNumber,
         "type":"text",
          "text":{
-            "body":message
+            "body":"saludos"
         }
             
         
@@ -239,5 +239,5 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
         chat.save()
         message="Porfavor, Ahora ingresa negocio"
         #sendWhatsAppMessage(fromId,message)
-        sendWhatsAppMedia(fromId,message)
+        sendWhatsAppMedia(fromId)
 
