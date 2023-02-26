@@ -41,7 +41,7 @@ def sendWhatsAppMessage(phoneNumber, message):
     ans = response.json()
     return ans
 
-def sendWhatsAppMedia(phoneNumber):
+def sendWhatsAppMedia(phoneNumber,message):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
         "messaging_product":"whatsapp",
@@ -49,7 +49,7 @@ def sendWhatsAppMedia(phoneNumber):
         "to":phoneNumber,
         "type":"text",
          "text":{
-            "body":"saludos"
+            "body":message
         }
             
         
@@ -239,5 +239,5 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
         chat.save()
         message="Porfavor, Ahora ingresa negocio"
         #sendWhatsAppMessage(fromId,message)
-        sendWhatsAppMedia(fromId)
+        sendWhatsAppMedia(fromId,message)
 
