@@ -47,10 +47,9 @@ def sendWhatsAppMedia(phoneNumber):
         "messaging_product":"whatsapp",
         "recipient_type":"individual",
         "to":phoneNumber,
-        "type":"document",
-        "document":{
-            "link":"https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1",
-            "filename":"840602348bf6.pdf"
+        "type":"text",
+         "text":{
+            "body":"saludos"
         }
             
         
