@@ -44,16 +44,112 @@ def sendWhatsAppMessage(phoneNumber, message):
 def sendWhatsAppMedia(phoneNumber):
     headers = {"Authorization": settings.WHATSAPP_TOKEN}
     payload = {
-        "messaging_product":"whatsapp",
-        "recipient_type":"individual",
-        "to":phoneNumber,
-        "type":"document",
-        "document":{
-            "link":"https://botwhatsappdemoleo.store/uploads/business_plans/dab6c12e0fa1/3170d3c8d05b.pdf"
-        }
+    "to": phoneNumber,
+    "type": "template",
+    "template": {
+        "namespace": "your-namespace",
+        "language": {
+            "policy": "deterministic",
+            "code": "your-language-and-locale-code"
+        },
+        "name": "your-template-name",
+        "components": [
+            {
+                "type" : "header",
+                "parameters": [
+                    {
+                        "type": "text",
+                        "text": "replacement_text"
+                    }
+                ]
+            # end header
+            },
+            {
+                "type" : "body",
+                "parameters": [
+                    {
+                        "type": "text",
+                        "text": "replacement_text"
+                    },
+                    {
+                        "type": "currency",
+                        "currency" : {
+                            "fallback_value": "$100.99",
+                            "code": "USD",
+                            "amount_1000": 100990
+                        }
+                    },
+                    {
+                        "type": "date_time",
+                        "date_time" : {
+                            "fallback_value": "February 25, 1977",
+                            "day_of_week": 5,
+                            "day_of_month": 25,
+                            "year": 1977,
+                            "month": 2,
+                            "hour": 15,
+                            "minute": 33, #OR
+                            "timestamp": 1485470276
+                        }
+                    },
+                    {
+                        ...
+                        # Any additional template parameters
+                    }
+                ] 
+            # end body
+            },
+
+            # The following part of this code example includes several possible button types, 
+            # not all are required for an interactive message template API call.
+            {
+                "type": "button",
+                "sub_type" : "quick_reply",
+                "index": "0", 
+                "parameters": [
+                    {
+                        "type": "payload",
+                        # Business Developer-defined payload
+                        "payload":"aGlzIHRoaXMgaXMgY29vZHNhc2phZHdpcXdlMGZoIGFTIEZISUQgV1FEV0RT"
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "sub_type" : "url",
+                "index": "1", 
+                "parameters": [
+                    {
+                        "type": "text",
+                        # Business Developer-defined dynamic URL suffix
+                        "text": "9rwnB8RbYmPF5t2Mn09x4h"
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "sub_type" : "url",
+                "index": "2",
+                "parameters": [
+                    {                    
+                        "type": "text",
+                        # Business Developer-defined dynamic URL suffix
+                        "text": "ticket.pdf"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+        #"messaging_product":"whatsapp",
+        #"recipient_type":"individual",
+        #"to":phoneNumber,
+        
+        
             
         
-    }
+    
     response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
     ans = response.json()
     return ans       
