@@ -238,7 +238,7 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
     else:
         chat.nombre_empresa=text
         chat.save()
-        message="Porfavo, Ahora porfavor ingresa negocio"
+        message="Porfavor, Ahora ingresa negocio"
         sendWhatsAppMessage(fromId,message)
         sendWhatsAppMedia(fromId)
 
