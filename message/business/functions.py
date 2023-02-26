@@ -47,25 +47,71 @@ def sendWhatsAppMedia(phoneNumber):
         "messaging_product":"whatsapp",
         "recipient_type":"individual",
         "to":phoneNumber,
-        "type":"template",
-        "template":{
-            "components":[
+        "type": "template",
+        "template": {
+            "name": "agro_vent",
+            "language": {
+            "code": "spanish_AND_LOCALE_CODE"
+        },
+        "components": [
+         {
+            "type": "header",
+            "parameters": [
                 {
-                "type":"header",
-                "parameters":[
-                    {
-                        "type": "text",
-                        "text": "replacement_text"
-                    }
-        
-                ]
-
+                    "type": "image",
+                    "image": {
+                    "link": "http(s)://URL"
                 }
-            ]
-
-        }
-            
-        
+          }
+        ]
+      },
+      {
+        "type": "body",
+        "parameters": [
+          {
+            "type": "text",
+            "text": "TEXT_STRING"
+          },
+          {
+            "type": "currency",
+            "currency": {
+              "fallback_value": "VALUE",
+              "code": "USD",
+              "amount_1000": phoneNumber
+            }
+          },
+          {
+            "type": "date_time",
+            "date_time": {
+              "fallback_value": "MONTH DAY, YEAR"
+            }
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "sub_type": "quick_reply",
+        "index": "0",
+        "parameters": [
+          {
+            "type": "payload",
+            "payload": "PAYLOAD"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "sub_type": "quick_reply",
+        "index": "1",
+        "parameters": [
+          {
+            "type": "payload",
+            "payload": "PAYLOAD"
+          }
+        ]
+      }
+    ]
+  }
     }
     response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
     ans = response.json()
