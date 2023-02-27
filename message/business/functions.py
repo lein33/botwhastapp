@@ -154,88 +154,88 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             phoneNumber=fromId,
             phoneId=phoneId)
             
-        chat = ChatSessions.objects.create(perfil=user_profile)
-        message ="Bienvenido al asistente EL Plan estrategico Empresarial 🧔‍♂️🧔👩‍🦳🌰"
-        sendWhatsAppMessage(fromId,message)
+    chat = ChatSessions.objects.create(perfil=user_profile)
+    message ="Bienvenido al asistente EL Plan estrategico Empresarial 🧔‍♂️🧔👩‍🦳🌰"
+    sendWhatsAppMessage(fromId,message)
 
-        if chat.nombre_empresa:
-            if chat.tipo_empresa:
-                if chat.pais:
-                    if chat.prducto_servicio:
-                        if chat.descripcion_corta:
-                            if chat.años:
-                                if chat.progreso:
-                                    message ="danos un momento"
-                                    sendWhatsAppMessage(fromId,message)
-                                    createNewBusinessPlan(chat)
-                                    return ''
-                                else:
-                                    chat.progreso = text
-                                    chat.save()
-                                    message =" Bien,nosotros tenemos lo que estas buscando"
-                                    sendWhatsAppMessage(fromId,message)
-                                    
-                                    return ''
-                                    
+    if chat.nombre_empresa:
+        if chat.tipo_empresa:
+            if chat.pais:
+                if chat.prducto_servicio:
+                    if chat.descripcion_corta:
+                        if chat.años:
+                            if chat.progreso:
+                                message ="danos un momento"
+                                sendWhatsAppMessage(fromId,message)
+                                createNewBusinessPlan(chat)
+                                return ''
                             else:
-                                try:
-                                    años = int(text.replace(' ',''))
-                                    chat.años=años
-                                    chat.save()
-
-                                    message =" Que logros has conseguido con tu negocio"
-                                    sendWhatsAppMessage(fromId,message)
-                                    return ''
-                                except:
-                                    message =" intenta nuevamente cuantos tiempo estas en el negocio 1 o 2"
-                                    sendWhatsAppMessage(fromId,message)
-                                    return ''
+                                chat.progreso = text
+                                chat.save()
+                                message =" Bien,nosotros tenemos lo que estas buscando"
+                                sendWhatsAppMessage(fromId,message)
+                                
+                                return ''
+                                
                         else:
-                            chat.descripcion_corta = text
-                            chat.save()
-                            message ="Cuantos tiempo estas en el negocio 1 o 2"
-                            sendWhatsAppMessage(fromId,message)
+                            try:
+                                años = int(text.replace(' ',''))
+                                chat.años=años
+                                chat.save()
+
+                                message =" Que logros has conseguido con tu negocio"
+                                sendWhatsAppMessage(fromId,message)
+                                return ''
+                            except:
+                                message =" intenta nuevamente cuantos tiempo estas en el negocio 1 o 2"
+                                sendWhatsAppMessage(fromId,message)
+                                return ''
                     else:
-                        chat.prducto_servicio = text
+                        chat.descripcion_corta = text
                         chat.save()
-                        message ="Describe la idea de tu negocio en dos oraciones"
+                        message ="Cuantos tiempo estas en el negocio 1 o 2"
                         sendWhatsAppMessage(fromId,message)
                 else:
-                    chat.pais = text
+                    chat.prducto_servicio = text
                     chat.save()
-                    message ="Que producto o servicio te gustaria"
+                    message ="Describe la idea de tu negocio en dos oraciones"
                     sendWhatsAppMessage(fromId,message)
             else:
-                try:
-                    type =  int(text.replace(' ',''))
-                    if type == 1:
-                        chat.tipo_empresa='(pty) Ltd'
-                        chat.save()
-                        message="Que pais prefieres aplicar"
-                        sendWhatsAppMessage(fromId,message)
-                    elif type == 2:
-                        chat.tipo_empresa='Not Profit'
-                        chat.save()
-                        message="Que pais prefieres aplicar"
-                        sendWhatsAppMessage(fromId,message)
-                    elif type == 3:
-                        chat.tipo_empresa='Que pais prefieres aplicar'
-                        chat.save()
-                        message="Que pais prefieres aplicar"
-                        sendWhatsAppMessage(fromId,message)
-                    else:
-                        message="intentalo otra vez"
-                        sendWhatsAppMessage(fromId,message)      
-                except:
-                    message="intentalo otra vez"
-                    sendWhatsAppMessage(fromId,message)
-
-            
-
+                chat.pais = text
+                chat.save()
+                message ="Que producto o servicio te gustaria"
+                sendWhatsAppMessage(fromId,message)
         else:
-            chat.nombre_empresa=text
-            chat.save()
-            message="Porfavor, Ahora ingresa negocio"
-            sendWhatsAppMessage(fromId,message)
+            try:
+                type =  int(text.replace(' ',''))
+                if type == 1:
+                    chat.tipo_empresa='(pty) Ltd'
+                    chat.save()
+                    message="Que pais prefieres aplicar"
+                    sendWhatsAppMessage(fromId,message)
+                elif type == 2:
+                    chat.tipo_empresa='Not Profit'
+                    chat.save()
+                    message="Que pais prefieres aplicar"
+                    sendWhatsAppMessage(fromId,message)
+                elif type == 3:
+                    chat.tipo_empresa='Que pais prefieres aplicar'
+                    chat.save()
+                    message="Que pais prefieres aplicar"
+                    sendWhatsAppMessage(fromId,message)
+                else:
+                    message="intentalo otra vez"
+                    sendWhatsAppMessage(fromId,message)      
+            except:
+                message="intentalo otra vez"
+                sendWhatsAppMessage(fromId,message)
+
+        
+
+    else:
+        chat.nombre_empresa=text
+        chat.save()
+        message="Porfavor, Ahora ingresa negocio"
+        sendWhatsAppMessage(fromId,message)
         #sendWhatsAppMedia(fromId)
 
