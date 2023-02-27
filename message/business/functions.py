@@ -129,7 +129,7 @@ def createNewBusinessPlan(chat):
     message='Your business \n \n{}'.format(doc_url)
     sendWhatsAppMessage(chat.perfil.phoneNumber,  message)
     chat.delete()
-    user = User.objects.get(username=chat.perfil.user.username)
+    user = User.objects.get(username='105616952219706')
     user.delete()
     #userdel = User.objects.filter(username=chat.perfil.user.username)
     #userdel.delete()
