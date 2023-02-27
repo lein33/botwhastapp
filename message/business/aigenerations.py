@@ -38,7 +38,7 @@ def descripcion_compania(nombre_empresa,tipo_negocio,pais,producto_servicio,desc
 
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'][0]['text'].replace('\n','<br>')
+            answer = response['choices'][0]['text']
             return nombre_empresa+answer
         else:
             return ''
