@@ -154,9 +154,9 @@ def handleWhatsAppChat(fromId, profileName, phoneId,text):
             phoneNumber=fromId,
             phoneId=phoneId)
             
-    chat = ChatSessions.objects.create(perfil=user_profile)
-    message ="Bienvenido al asistente EL Plan estrategico Empresarial 🧔‍♂️🧔👩‍🦳🌰"
-    sendWhatsAppMessage(fromId,message)
+        chat = ChatSessions.objects.create(perfil=user_profile)
+        message ="Bienvenido al asistente EL Plan estrategico Empresarial 🧔‍♂️🧔👩‍🦳🌰"
+        sendWhatsAppMessage(fromId,message)
 
     if chat.nombre_empresa:
         if chat.tipo_empresa:
