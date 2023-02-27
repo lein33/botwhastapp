@@ -46,72 +46,8 @@ def sendWhatsAppMedia(phoneNumber):
     payload = {
         "messaging_product":"whatsapp",
         "recipient_type":"individual",
-        "to":phoneNumber,
-        "type": "template",
-        "template": {
-            "name": "agro_vent",
-            "language": {
-            "code": "spanish_AND_LOCALE_CODE"
-        },
-        "components": [
-         {
-            "type": "header",
-            "parameters": [
-                {
-                    "type": "image",
-                    "image": {
-                    "link": "http(s)://URL"
-                }
-          }
-        ]
-      },
-      {
-        "type": "body",
-        "parameters": [
-          {
-            "type": "text",
-            "text": "TEXT_STRING"
-          },
-          {
-            "type": "currency",
-            "currency": {
-              "fallback_value": "VALUE",
-              "code": "USD",
-              "amount_1000": phoneNumber
-            }
-          },
-          {
-            "type": "date_time",
-            "date_time": {
-              "fallback_value": "MONTH DAY, YEAR"
-            }
-          }
-        ]
-      },
-      {
-        "type": "button",
-        "sub_type": "quick_reply",
-        "index": "0",
-        "parameters": [
-          {
-            "type": "payload",
-            "payload": "PAYLOAD"
-          }
-        ]
-      },
-      {
-        "type": "button",
-        "sub_type": "quick_reply",
-        "index": "1",
-        "parameters": [
-          {
-            "type": "payload",
-            "payload": "PAYLOAD"
-          }
-        ]
-      }
-    ]
-  }
+        "to":phoneNumber
+        
     }
     response = requests.post(settings.WHATSAPP_URL,headers=headers,json=payload)
     ans = response.json()
@@ -193,6 +129,8 @@ def createNewBusinessPlan(chat):
     message='Your business \n \n{}'.format(doc_url)
     sendWhatsAppMessage(chat.perfil.phoneNumber,  message)
     chat.delete()
+    user = User.objects.get(user=chat.perfil.user.username)
+    user.delete()
     #userdel = User.objects.filter(username=chat.perfil.user.username)
     #userdel.delete()
 def handleWhatsAppChat(fromId, profileName, phoneId,text):

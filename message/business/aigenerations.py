@@ -57,7 +57,7 @@ def AnalisiMercado(nombre_empresa, producto_servicio,descripcion_corta):
 )
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'][0]['text'].replace('\n','<br/>')
+            answer = response['choices'][0]['text'].replace('\n','<br>')
             return nombre_empresa+answer
         else:
             return ''
@@ -76,7 +76,7 @@ def detalle_producto(nombre_empresa, producto_servicio,descripcion_corta):
 )
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'][0]['text'].replace('\n','<br/>')
+            answer = response['choices'][0]['text'].replace('\n','<br>')
             return nombre_empresa+answer
         else:
             return ''
@@ -95,7 +95,7 @@ def PlanEstrategiaMarketing(nombre_empresa, producto_servicio, descripcion_corta
 )
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'][0]['text'].replace('\n','<br/>')
+            answer = response['choices'][0]['text'].replace('\n','<br>')
             return nombre_empresa+answer
         else:
             return ''
