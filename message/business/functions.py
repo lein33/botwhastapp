@@ -67,7 +67,7 @@ def createPDF(chat, plan_negocio):
     context['analisis_mercado'] = plan_negocio.analisis_mercado
     context['analisis_foda']=plan_negocio.analisis_foda
     context['detalle_producto']=plan_negocio.detalle_producto
-    context['etrategia_marketing']=plan_negocio.strategia_marketing
+    context['estrategia_marketing']=plan_negocio.strategia_marketing
 
   #Render the HTML
     html = template.render(context)
