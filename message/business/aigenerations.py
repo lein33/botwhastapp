@@ -17,7 +17,7 @@ def descripcion_compania_progreso(nombre_empresa,tipo_negocio,pais,producto_serv
 
     if 'choices' in response:
         if len(response['choices'])>0:
-            answer = response['choices'].replace('\n','\n')
+            answer = response['choices'][0]['text'].replace('\n','\n')
             return nombre_empresa+answer
         else:
             return ''
