@@ -63,8 +63,8 @@ def createPDF(chat, plan_negocio):
     context = {}
     context['fecha']=plan_negocio.fecha_creacion
     context['nombre_compania']=chat.nombre_empresa
-    #context['descripcion_compania'] = plan_negocio.descripcion_compania
-    #context['analisis_mercado'] = plan_negocio.analisis_mercado
+    context['descripcion_compania'] = plan_negocio.descripcion_compania
+    context['analisis_mercado'] = plan_negocio.analisis_mercado
     #context['analisis_foda']=plan_negocio.analisis_foda
     #context['detalle_producto']=plan_negocio.detalle_producto
     #context['strategia_marketing']=plan_negocio.strategia_marketing
