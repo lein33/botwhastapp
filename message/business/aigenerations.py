@@ -120,3 +120,4 @@ def AnalisisFoda(nombre_empresa, producto_servicio, descripcion_corta):
             return ''
     else:
         return ''
+
