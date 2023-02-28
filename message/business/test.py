@@ -17,4 +17,3 @@ def add(n1,n2):
 
 thread = CustomThread(target=add,args=(3,4))
 thread.start()
-print(thread.join())
